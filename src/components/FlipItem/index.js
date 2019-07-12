@@ -16,6 +16,16 @@ export default class index extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    const { current } = nextProps
+    if (current !== this.props.current) {
+      this.setState({
+        before: this.props.current,
+        isPlay: true
+      })
+    }
+  }
+
   render() {
     const { total, current } = this.props
     const { isPlay, before } = this.state

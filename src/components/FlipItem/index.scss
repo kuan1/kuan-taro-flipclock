@@ -83,16 +83,16 @@ $radius: 6px;
       z-index: 3;
     }
     &.active {
-      animation: asd 0.5s 0.5s linear both;
+      animation: asd 0.45s 0.45s linear both;
       z-index: 2;
     }
     &.before .up {
       z-index: 2;
-      animation: turn-up 0.5s linear both;
+      animation: turn-up 0.45s linear both;
     }
     &.active .down {
       z-index: 2;
-      animation: turn-down 0.5s 0.5s linear both;
+      animation: turn-down 0.45s 0.45s linear both;
     }
   }
 }

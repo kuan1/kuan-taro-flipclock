@@ -1,5 +1,5 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View } from '@tarojs/components'
+import { View, Text } from '@tarojs/components'
 
 import FlipClock from '../../components/FlipClock'
 
@@ -14,6 +14,14 @@ export default class Index extends Component {
     return (
       <View className='test-clock-container'>
         <FlipClock />
+        <View className='footer'>
+          <View>版权所有©卢忠宽</View>
+          <View className='tip'>
+            使用
+            <Text className='t'>Taro</Text>
+            开发小程序翻页日历
+          </View>
+        </View>
       </View>
     )
   }
