@@ -1,0 +1,20 @@
+.clock-container {
+  display: flex;
+  align-items: center;
+}
+.colon {
+  height: 50px;
+  padding: 0 10px;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  &::after,
+  &::before {
+    content: '';
+    display: block;
+    width: 10px;
+    height: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 50%;
+  }
+}
