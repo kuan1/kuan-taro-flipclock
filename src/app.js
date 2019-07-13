@@ -14,9 +14,9 @@ class App extends Component {
     pages: ['pages/index/index'],
     window: {
       backgroundTextStyle: 'light',
-      navigationBarBackgroundColor: '#000000',
+      navigationBarBackgroundColor: '#ffffff',
       navigationBarTitleText: '翻页时钟',
-      navigationBarTextStyle: 'white'
+      navigationBarTextStyle: 'black'
     }
   }
 
