@@ -7,7 +7,9 @@ import './index.scss'
 
 export default class Index extends Component {
   config = {
-    navigationBarTitleText: '翻页时钟'
+    navigationBarTitleText: '翻页时钟',
+    disableScroll: true,
+    navigationStyle: 'custom'
   }
 
   render() {
