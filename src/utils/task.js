@@ -13,7 +13,7 @@ export default {
   },
   add(item) {
     const list = this.get()
-    list.push(item)
+    list.unshift(item)
     this.set(list)
     return list
   },

@@ -1,0 +1,13 @@
+.blank-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 80vh;
+  font-size: 24px;
+  color: #68676c;
+  .img {
+    width: 600px;
+    height: 320px;
+  }
+}

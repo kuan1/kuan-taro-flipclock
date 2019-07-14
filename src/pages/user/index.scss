@@ -1,0 +1,26 @@
+.user-container {
+  padding-top: 5px;
+  .item {
+    border-bottom: 1px solid #eee;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    margin: 0 40px;
+    font-size: 26px;
+    justify-content: space-between;
+    .time {
+      color: #666;
+      font-size: 24px;
+      padding-left: 20px;
+    }
+    .doing {
+      color: #1aad19;
+    }
+    .expired {
+      color: #f04864;
+    }
+    .done {
+      color: #e7e7ef;
+    }
+  }
+}

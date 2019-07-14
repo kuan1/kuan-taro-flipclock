@@ -2,19 +2,22 @@ import Taro, { Component } from '@tarojs/taro'
 import { View, Text, Input, Picker } from '@tarojs/components'
 import moment from 'moment'
 
+import task from '@/utils/task'
+
 import FlipClock from '../../components/FlipClock'
 
 import './index.scss'
 
 export default class Index extends Component {
   config = {
-    navigationBarTitleText: '添加任务',
+    navigationBarTitleText: '添加',
     disableScroll: true
   }
 
   constructor(props) {
     super(props)
     const [date, time] = moment()
+      .add(10, 'minutes')
       .format('YYYY-MM-DD HH:mm')
       .split(' ')
     this.state = {
@@ -26,6 +29,24 @@ export default class Index extends Component {
     }
   }
 
+  componentDidShow() {
+    this.refreshTime()
+  }
+
+  refreshTime() {
+    const [date, time] = moment()
+      .add(10, 'minutes')
+      .format('YYYY-MM-DD HH:mm')
+      .split(' ')
+    this.setState({
+      data: {
+        name: '',
+        date,
+        time
+      }
+    })
+  }
+
   change = (key, e) => {
     const { data } = this.state
     data[key] = e.detail.value
@@ -35,7 +56,10 @@ export default class Index extends Component {
   }
 
   submit = () => {
-    console.log(this.state.data)
+    task.add(this.state.data)
+    Taro.switchTab({
+      url: '/pages/user/index'
+    })
   }
 
   renderAction() {
@@ -44,6 +68,7 @@ export default class Index extends Component {
       <View className='action-container'>
         <View className='form-item'>
           <Input
+            maxLength={8}
             onInput={this.change.bind(this, 'name')}
             value={data.name}
             className='input'
