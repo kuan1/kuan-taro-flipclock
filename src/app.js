@@ -11,12 +11,30 @@ import './app.scss'
 
 class App extends Component {
   config = {
-    pages: ['pages/index/index'],
+    pages: ['pages/index/index', 'pages/user/index'],
     window: {
       backgroundTextStyle: 'light',
-      navigationBarBackgroundColor: '#ffffff',
+      navigationBarBackgroundColor: 'white',
       navigationBarTitleText: '翻页时钟',
       navigationBarTextStyle: 'black'
+    },
+    tabBar: {
+      color: '#666666',
+      selectedColor: '#2b2f42',
+      list: [
+        {
+          pagePath: 'pages/index/index',
+          iconPath: './images/tabbar/home.png',
+          selectedIconPath: './images/tabbar/home_active.png',
+          text: '添加'
+        },
+        {
+          pagePath: 'pages/user/index',
+          iconPath: './images/tabbar/user.png',
+          selectedIconPath: './images/tabbar/user_active.png',
+          text: '我的'
+        }
+      ]
     }
   }
 
