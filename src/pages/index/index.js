@@ -33,6 +33,10 @@ export default class Index extends Component {
     this.refreshTime()
   }
 
+  onShareAppMessage() {
+    return {}
+  }
+
   refreshTime() {
     const [date, time] = moment()
       .add(10, 'minutes')

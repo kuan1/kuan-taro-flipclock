@@ -25,6 +25,10 @@ export default class User extends Component {
     this.fetchData()
   }
 
+  onShareAppMessage() {
+    return {}
+  }
+
   fetchData() {
     const list = task.get()
     this.setState({
