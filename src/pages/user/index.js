@@ -86,7 +86,7 @@ export default class User extends Component {
             const { list = [] } = this.state
             list[i].status = 2
             list[i].text = '已完成'
-            list.successTime = moment().format('YYYY-MM-DD HH:mm')
+            list[i].successTime = moment().format('YYYY-MM-DD HH:mm')
             this.setState({
               list: [...list]
             })
