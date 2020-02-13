@@ -1,5 +1,5 @@
 .test-clock-container {
-  font: normal 24px 'Helvetica Neue', Helvetica, sans-serif;
+  font: normal 24px "Helvetica Neue", Helvetica, sans-serif;
   user-select: none;
   background: white;
   min-height: 100vh;
@@ -20,13 +20,13 @@
     right: 0;
     margin: auto;
     text-align: center;
-    font-size: 18px;
+    font-size: 20px;
   }
   .tip {
-    opacity: 0.7;
+    color: #aaa;
   }
   .t {
-    opacity: 1;
+    color: #999;
   }
   .clock-container {
     flex: 1;

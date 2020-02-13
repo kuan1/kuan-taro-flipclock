@@ -1,5 +1,7 @@
 .user-container {
   padding-top: 5px;
+  min-height: 100vh;
+  padding-bottom: 250px;
   .item {
     border-bottom: 1px solid #eee;
     height: 100px;
@@ -22,5 +24,11 @@
     .done {
       color: #e7e7ef;
     }
+  }
+  .user-footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
   }
 }

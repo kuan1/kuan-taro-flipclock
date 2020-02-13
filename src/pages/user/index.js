@@ -1,138 +1,152 @@
-import Taro, { Component } from '@tarojs/taro'
-import { View, Text } from '@tarojs/components'
-import moment from 'moment'
+import Taro, { Component } from "@tarojs/taro";
+import { View, Text, Ad } from "@tarojs/components";
+import moment from "moment";
 
-import task from '@/utils/task'
-import { remainTime } from '@/utils'
+import task from "@/utils/task";
+import { remainTime } from "@/utils";
 
-import Blank from '@/components/Blank'
+import Blank from "@/components/Blank";
 
-import './index.scss'
+import "./index.scss";
 
 export default class User extends Component {
   config = {
-    navigationBarTitleText: '我的'
-  }
+    navigationBarTitleText: "我的"
+  };
   static options = {
     addGlobalClass: true
-  }
+  };
 
   state = {
-    list: []
-  }
+    list: [],
+    visible: true
+  };
 
   componentDidShow() {
-    this.fetchData()
+    this.fetchData();
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({
+        visible: false
+      });
+    }, 1000 * 15);
   }
 
   onShareAppMessage() {
-    return {}
+    return {};
   }
 
   fetchData() {
-    const list = task.get()
+    const list = task.get();
     this.setState({
-      list: list.map(item => {
-        const { status, text } = this.getStatus(item)
+      list: list.map((item, key) => {
+        const { status, text } = this.getStatus(item);
         return {
+          key,
           ...item,
           status,
           text
-        }
+        };
       })
-    })
+    });
   }
 
   getStatus({ date, time, status }) {
     if (status === 2) {
       return {
         status: 2,
-        text: '已完成'
-      }
+        text: "已完成"
+      };
     }
     return moment(`${date} ${time}`).isBefore(moment())
       ? {
           status: 1,
-          text: '已逾期'
+          text: "已逾期"
         }
       : {
           status: 0,
-          text: '进行中'
-        }
+          text: "进行中"
+        };
   }
 
   remove(i) {
-    const { list } = this.state
-    list.splice(i, 1)
+    const { list } = this.state;
+    list.splice(i, 1);
     this.setState({
       list
-    })
-    task.set(list)
+    });
+    task.set(list);
     Taro.showToast({
-      title: '删除成功'
-    })
+      title: "删除成功"
+    });
   }
 
   showAction(item, i) {
     // 已经完成
     if (item.status === 2) {
       Taro.showActionSheet({
-        itemList: ['删除'],
+        itemList: ["删除"],
         success: () => {
-          this.remove(i)
+          this.remove(i);
         }
-      })
+      });
     } else {
       Taro.showActionSheet({
-        itemList: ['完成', '删除'],
+        itemList: ["完成", "删除"],
         success: res => {
           if (res.tapIndex == 0) {
-            const { list = [] } = this.state
-            list[i].status = 2
-            list[i].text = '已完成'
-            list[i].successTime = moment().format('YYYY-MM-DD HH:mm')
+            const { list = [] } = this.state;
+            list[i].status = 2;
+            list[i].text = "已完成";
+            list[i].successTime = moment().format("YYYY-MM-DD HH:mm");
             this.setState({
               list: [...list]
-            })
-            task.set(list)
+            });
+            task.set(list);
             Taro.showToast({
-              title: '已设置完成'
-            })
+              title: "已设置完成"
+            });
           } else {
-            this.remove(i)
+            this.remove(i);
           }
         }
-      })
+      });
     }
   }
 
   render() {
-    const { list = [] } = this.state
+    const { list = [], visible } = this.state;
     const classMap = {
-      0: 'doing',
-      1: 'expired',
-      2: 'done'
-    }
-
-    if (!list.length) return <Blank />
+      0: "doing",
+      1: "expired",
+      2: "done"
+    };
 
     return (
-      <View className='user-container'>
-        <View className='list'>
+      <View className="user-container">
+        <View>{!list.length && <Blank />}</View>
+        {visible && list.length <= 1 && (
+          <View className="user-footer">
+            <Ad unit-id="adunit-c58e589ead5ce436"></Ad>
+          </View>
+        )}
+        <View className="list">
           {list.map((item, i) => (
             <View
-              key
+              key={item.key}
               onClick={this.showAction.bind(this, item, i)}
-              className='item'
+              className="item"
             >
               <View>
-                {item.name || '匿名任务'}{' '}
-                <Text className='time'>
+                {item.name || "匿名任务"}{" "}
+                <Text className="time">
                   {item.successTime
                     ? `完成于${item.successTime}`
                     : item.status !== 0
                     ? `${item.date} ${item.time}`
-                    : '剩余' +
+                    : "剩余" +
                       remainTime(moment(`${item.date} ${item.time}`).toDate())}
                 </Text>
               </View>
@@ -143,6 +157,6 @@ export default class User extends Component {
           ))}
         </View>
       </View>
-    )
+    );
   }
 }
